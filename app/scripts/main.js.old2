@@ -1,0 +1,299 @@
+
+console.log(d3.version);
+
+var minuteFormat = d3.timeFormat("%H%M");
+
+var speed = 1.0,
+    opacity = [0.0, 0.5],
+    num = 0,
+    count = 0;
+
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 500 - margin.left - margin.right,
+    height = 1500 - margin.top - margin.bottom;
+
+// Define the div for the tooltip
+var div = d3.select("body").append("div") 
+    .attr("class", "tooltip")       
+    .style("opacity", 0);
+
+var carriers = d3.scaleOrdinal(d3.schemeCategory10)
+    .domain(["NS International", "NS", "Arriva", "U-OV"]);
+
+var types = d3.scaleOrdinal()
+    .domain(["ICE International", "Intercity", "Sneltrein", "Sprinter", "Bus"])
+    .range([10,7,4,3,1]);
+
+var projection = d3.geoMercator()
+    .center([5.4, 52.088]) // Utrecht city center
+    .translate([width / 2, height / 2])
+    .scale(width * 18);
+
+var x = d3.scaleTime()
+    .domain([new Date(2016, 6, 28, 13), new Date(2016, 6, 28, 18)])
+//    .domain([new Date(2016, 6, 28, 0), new Date(2016, 6, 28, 24)])
+    .range([0, width - 100]);
+
+//var y = d3.scaleLinear()
+//    .range([height, 0]);
+
+var xAxis = d3.axisBottom(x);
+
+//var yAxis = d3.axisLeft(y);
+/*    .scale(y)
+    .orient("left")
+    .ticks(5);*/
+
+//var line = d3.line()
+//    .interpolate("basis")
+//    .x(function(d) { return x(d.time); })
+//    .y(function(d) { return y(d.code); });
+
+
+
+
+function drawBusyStations(stations) {
+
+  console.log(stations);
+
+var formatHour = d3.timeFormat('%H');
+
+console.log(d3.map(stations, function(d){ return d.station; }).keys());
+
+  var nested = d3.nest()
+    .key(function(d) { return d.station; })
+    .key(function(d) { return formatHour(d.time); }).sortKeys(d3.ascending)
+    .rollup(function(v) { return v.length; })
+    .entries(stations);
+
+console.log(nested);
+console.log(d3.keys(nested));
+
+
+  var width = 200,
+      height = 30;
+
+//  var barWidth = width / (24*60);
+
+  var x = d3.scaleTime()
+   //   .domain([new Date(2016, 6, 28, 13), new Date(2016, 6, 28, 18)])
+      .range([0, width]);
+
+console.log(x.domain());
+console.log(x.range());
+
+  var xAxis = d3.axisBottom(x);
+
+  x.domain([
+    d3.min(nested, function(carrier) { return carrier.values[0].key; }),
+    d3.max(nested, function(carrier) { return carrier.values[carrier.values.length - 1].key; })
+  ]);
+
+
+  console.log(x.domain());
+
+  var y = d3.local();
+  var area = d3.local();
+  var line = d3.local();
+
+  var g = d3.select('.g-the-stations');
+  console.log(g);
+  console.log(g._groups[0][0]);
+  console.log(g._groups[0][0].parentNode);
+  console.log(g._groups[0][0].parentNode.width);
+
+//  var svg = d3.select('#the-stations').selectAll('svg')
+  var svg = g.selectAll('g')
+    .data(nested).enter()
+//  .append('svg')
+//    .attr('width', width + margin.left + margin.right)
+//    .attr('height', height + margin.top + margin.bottom)
+  .append('g')
+    .attr('class', 'carrier')
+    .attr('id', function(d) { return 'carrier-' + d.key; })
+    .attr('transform', function(d,i) { return 'translate(' + 0 + ',' + i * height * 1.5 + ')'; })
+    .each(function(d) {
+        var ty = y.set(this, d3.scaleLinear()
+            .domain([0, d3.max(d.values, function(d) { return d.value; })])
+            .range([height, 0]));
+
+        area.set(this, d3.area()
+            .x(function(d) { return x(d.key); })
+            .y0(height)
+            .y1(function(d) { return ty(d.value); }));
+
+        line.set(this, d3.line()
+            .x(function(d) { return x(d.key); })
+            .y(function(d) { return ty(d.value); }));
+      });
+
+  svg.append('g')
+      .attr('class', 'x axis')
+      .attr('transform', 'translate(0,' + height + ')')
+      .call(xAxis);
+
+  svg.append('path')
+      .attr('class', 'area')
+      .attr('d', function(d) { return area.get(this)(d.values); });
+
+  svg.append('path')
+      .attr('class', 'line')
+      .attr('d', function(d) { return line.get(this)(d.values); });
+
+  svg.append('text')
+      .attr('x', width - 6)
+      .attr('y', height - 6)
+      .attr('fill', '#aaa')
+      .text(function(d) { return d.key; });
+}
+
+function drawCarriers(carriers) {
+
+  var width = 300,
+      height = 100;
+
+  var barWidth = width / (24*60);
+
+  var x = d3.scaleTime()
+      .domain([new Date(2016, 6, 28, 13), new Date(2016, 6, 28, 18)])
+      .range([0, width]);
+
+  var xAxis = d3.axisBottom(x);
+
+  x.domain([
+    d3.min(carriers, function(carrier) { console.log(carrier); return d3.isoParse(carrier.values[0].key); }),
+    d3.max(carriers, function(carrier) { return d3.isoParse(carrier.values[carrier.values.length - 1].key); })
+  ]);
+
+  var y = d3.local();
+  var area = d3.local();
+  var line = d3.local();
+
+  var svg = d3.select("#the-carriers").selectAll("svg")
+    .data(carriers).enter()
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("class", "carrier")
+    .attr("id", function(d) { return "carrier-" + d.key; })
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    .each(function(d) {
+        var ty = y.set(this, d3.scaleLinear()
+            .domain([0, d3.max(d.values, function(d) { return d.value; })])
+            .range([height, 0]));
+
+        area.set(this, d3.area()
+            .x(function(d) { return x(d3.isoParse(d.key)); })
+            .y0(height)
+            .y1(function(d) { return ty(d.value); }));
+
+        line.set(this, d3.line()
+            .x(function(d) { return x(d3.isoParse(d.key)); })
+            .y(function(d) { return ty(d.value); }));
+      });
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("path")
+      .attr("class", "area")
+      .attr("d", function(d) { return area.get(this)(d.values); });
+
+  svg.append("path")
+      .attr("class", "line")
+      .attr("d", function(d) { return line.get(this)(d.values); });
+
+  svg.append("text")
+      .attr("x", width - 6)
+      .attr("y", height - 6)
+      .attr("fill", "#aaa")
+      .text(function(d) { return d.key; });
+}
+
+
+queue()
+    .defer(d3.csv, "../data/stations.csv")
+    .defer(d3.csv, "../data/timetable2.csv")
+    .await(ready);
+
+
+function ready(error, stations, timetable) {
+  if (error) return console.error(error);
+
+
+  stations.forEach(function(d) {
+    d.lat = +d.lat,
+    d.lon = +d.lon
+  });
+
+  console.log(stations);
+
+  var hourFormat = d3.timeFormat("%H");
+
+  console.log(timetable);
+
+  timetable.forEach(function(d) {
+    d.datetime = d3.isoParse(d.time);
+//    d.hour = hourFormat(d.datetime);
+  });
+
+//  console.log(stations);
+//  console.log(timetable);
+
+
+  var filtered = timetable;//.filter(function(d) { return d.carrier == "Arriva" || d.carrier == "Valleilijn"; });
+  console.log(filtered);
+
+
+  var carrierSum = d3.nest()
+    .key(function(d) { return d.carrier; })
+//    .key(function(d) { return d.hour; }).sortKeys(d3.ascending)
+    .key(function(d) { return d.time; }).sortKeys(d3.ascending)
+    .rollup(function(v) { return v.length; })
+    .entries(filtered);
+
+   console.log(carrierSum);
+
+   drawCarriers(carrierSum);
+
+}
+
+
+var n = -1,//24*60,
+    i = 13*60 + 25,
+    h = -1,
+    m = -1,
+    interval = setInterval(function() {
+
+  if(i < n) {
+
+    h = Math.floor(i / 60);
+    m = i % 60;
+
+//    console.log("tick..." + i);
+    console.log(("0000" + i).slice(-4) + "] departure time: "+ ("00" + h).slice(-2) + ":" + ("00" + m).slice(-2));
+
+    // d.carrier d.type with destination d.dest leaves from platform d.platform at d.time 
+
+    // fade in and out
+    d3.select(".g-map").selectAll(".circle-" + ("00" + h).slice(-2) + "" + ("00" + m).slice(-2))
+      .transition()
+        .duration(500 / speed)
+        .style("opacity", opacity[1])
+        .attr("r", function(d){ return types(d.treinsoort); } || 2)
+      .transition()
+        .delay(1000 / speed)
+        .duration(500 / speed)
+        .style("opacity", opacity[0])
+        .attr("r", 2);
+
+  } else {
+//      clearInterval(interval);
+    i = -1;
+  }
+  // update counter
+  i++;
+}, 1000 / speed);

@@ -1,0 +1,62 @@
+/**
+ * _common.scss
+ */
+
+body {
+  margin: 40px 0;
+  width: 100%;
+  font-weight: normal;
+  font-size: $font-size-base;
+  font-family: $font-family-base;
+}
+
+img {
+  max-width: 100%;
+}
+
+a:hover,
+a:focus {
+  outline: 0;
+}
+
+text {
+  fill: $text-color;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: $font-size-header;
+}
+
+
+p {
+  margin-bottom: 12px;
+}
+
+
+// interactive text
+.hover-link {
+  text-decoration: none;
+  border-bottom: 1px dashed $link-color;
+}
+
+.hover-link:hover,
+.hover-link:focus {
+  text-decoration: none;
+  border-bottom: 1px dashed $link-hover-color;
+}
+
+a.click-link {
+  text-decoration: none;
+  border-bottom: 1px dashed $link-color;
+}
+
+
+// Axes
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}

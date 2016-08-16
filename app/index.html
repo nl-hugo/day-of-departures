@@ -1,0 +1,162 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>stations</title>
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/components-font-awesome/css/font-awesome.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+    <script src="/bower_components/d3/d3.min.js"></script>
+    <!-- endbuild -->
+
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-9">
+          <div class="chart" id="the-map" data-spy="affix" data-offset-top="-1" data-offset-bottom="-1" data-width="825" data-height="800" 
+          data-margin="{&quot;top&quot;: 10, &quot;right&quot;: 10, &quot;bottom&quot;: 10, &quot;left&quot;: 10}">
+          </div>  
+        </div>
+
+        <div class="col-md-3">
+          <div class="section">
+          <h1>Departures <br/> <small>A day in the life of trains.</small></h1>
+
+            <div class="chart" id="the-clock" data-width="200" data-height="50" data-margin="{&quot;top&quot;: 20, &quot;right&quot;: 20, &quot;bottom&quot;: 10, &quot;left&quot;: 10}"></div>
+
+            <div class="chart" id="the-controls" data-width="250" data-height="20" data-margin="{&quot;top&quot;: 20, &quot;right&quot;: 20, &quot;bottom&quot;: 10, &quot;left&quot;: 10}"></div>
+
+            <p>
+              <a href="javascript:stopTimer()" class="timer-stop disabled"><span class="fa fa-pause-circle-o fa-lg" aria-hidden="true"></span></a>
+              <a href="javascript:startTimer()" class="timer-start"><span class="fa fa-play-circle-o fa-lg" aria-hidden="true"></span></a>
+              <a href="javascript:restartTimer()" class="timer-repeat"><span class="fa fa-repeat fa-lg" aria-hidden="true"></span></a>
+            </p>
+            
+          </div>
+          <div class="section section-departures">
+            <h4>Departures</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.</p>
+                      <div class="chart" id="the-punchcard" data-width="250" data-height="130" data-margin="{&quot;top&quot;: 10, &quot;right&quot;: 10, &quot;bottom&quot;: 10, &quot;left&quot;: 10}"></div>
+        
+
+
+
+          </div>
+          <div class="section section-stations">
+            <h4>Stations</h4>
+            <p>Busiest stations - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.</p>
+            <p>
+              <a href="#" class="click-link highlight-stops" data-stops="UT">Utrecht Centraal</a>
+              <a href="#" class="click-link highlight-stops" data-stops="ASS">Amsterdam Sloterdijk</a>
+              <a href="#" class="click-link highlight-stops" data-stops="MRN,MTR,NML,UTM">kleine stations</a>
+            </p>
+
+
+                      <div class="chart" id="the-stations" data-width="250" data-height="300" data-margin="{&quot;top&quot;: 20, &quot;right&quot;: 20, &quot;bottom&quot;: 10, &quot;left&quot;: 10}"></div>
+            
+          </div>
+          <div class="section section-carriers">
+            <h4>Carriers</h4>
+            <p>
+                        <p>
+              <a href="#" data-carriers="NS" class="hover-link-highlight highlight-carriers">NS</a> |
+              <a href="#" data-carriers="Arriva" class="hover-link-highlight highlight-carriers">Arriva</a> |
+              <a href="#" data-carriers="NS International" class="hover-link-highlight highlight-carriers">NS International</a> |
+              <a href="#" data-carriers="Breng" class="hover-link-highlight highlight-carriers">Breng</a> |
+              <a href="#" data-carriers="Valleilijn" class="hover-link-highlight highlight-carriers">Valleilijn</a> |
+              <a href="#" data-carriers="Veolia" class="hover-link-highlight highlight-carriers">Veolia</a> |
+              <a href="#" data-carriers="Syntus" class="hover-link-highlight highlight-carriers">Syntus</a> |
+              <a href="#" data-carriers="NMBS" class="hover-link-highlight highlight-carriers">NMBS</a> |
+              <a href="#" data-carriers="DB" class="hover-link-highlight highlight-carriers">DB</a> |
+              <a href="#" data-carriers="Keolis" class="hover-link-highlight highlight-carriers">Keolis</a> |
+              <a href="#" data-carriers="Breng,Keolis,DB,NMBS,Veolia,Valleilijn,Arriva" class="hover-link-highlight highlight-carriers">kleine carriers</a> |
+            </p>
+            <p>
+              <b>The largest carrier in the Netherlands</b> is <a href="#" data-carriers="NS" class="hover-link-highlight highlight-carriers">NS</a> by far. Other carriers operate <a href="#" data-carriers="Breng,Veolia,Valleilijn,Arriva" class="hover-link-highlight highlight-carriers">regional services</a> outside the 'Randstad'. Stations close to the border are serviced by carriers in <a href="#" data-carriers="Keolis,DB,NMBS" class="hover-link-highlight highlight-carriers">cross-border</a> lines.
+            </p>
+          </div>
+          <div class="section">
+            <h4>Delays</h4>
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.
+            </p>
+          </div>
+          <div class="section">
+            <h4>About</h4>
+            <p>
+              <b>Design and implementation by <a href="http://www.hugojanssen.nl">Hugo Janssen</a>.</b> This project was inspired by <a href="http://mbtaviz.github.io/">Visualizing MBTA Data</a> and <a href="http://www.darkhorseanalytics.com/blog/breathing-city">Breathing city</a>. Data was obtained through the <a href="http://www.ns.nl/en/travel-information/ns-api">NS API</a> for which I coded a wrapper in R (see code <a href="https://github.com/nl-hugo">here</a>). Source code and raw data are available on <a href="https://github.com/nl-hugo">github</a>. 
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+      <div class="footer">
+        <p>Footer</p>
+      </div>
+    
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/d3/d3.js"></script>
+    <script src="/bower_components/d3-queue/queue.js"></script>
+    <script src="/bower_components/topojson/topojson.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    
+    <!-- build:js scripts/plugins.js -->
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/carousel.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
+    <!-- endbuild -->
+    
+    <!-- build:js scripts/main.js -->
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>
