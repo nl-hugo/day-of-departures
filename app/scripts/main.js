@@ -76,7 +76,8 @@ queue()
     .defer(d3.json, '../data/gemeente.json')
     .await(ready);
 
-function addSvg(id, w, h, m) {
+function addSvg(id, w, h /*, m*/) {
+  var m = {top:10, left:10, right:10, bottom:10};
   d3.select('#' + id).append('svg')
     .attr('width', w + m.left + m.right)
     .attr('height', h + m.top + m.bottom)
@@ -88,8 +89,8 @@ function addSvg(id, w, h, m) {
 
 function drawStations(map, stations) {
 
-  var margin = {top: 10, right: 10, bottom: 10, left: 10},
-      width = 845 - margin.left - margin.right,
+  var margin = {top: 0, right: 0, bottom: 10, left: 0},
+      width = 645 - margin.left - margin.right,
       height = 900 - margin.top - margin.bottom;
 
   var projection = d3.geoMercator()
@@ -176,8 +177,6 @@ function drawStations(map, stations) {
       .on('click', function(d) { toggleStations([d.data.code]); });
 
 }
-
-
 
 
 function drawBusyStations(stations) {
@@ -397,7 +396,7 @@ function ready(error, stations, timetable, map) {
   });
 
   d3.selectAll('div.chart')._groups[0].forEach(function(c) {
-    addSvg(c.id, +c.dataset.width, +c.dataset.height, JSON.parse(c.dataset.margin));
+    addSvg(c.id, +c.dataset.width, +c.dataset.height /*, JSON.parse(c.dataset.margin)*/);
   });
 
   // carrier types

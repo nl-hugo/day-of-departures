@@ -29,97 +29,134 @@
     <!--[if lt IE 10]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
-
     <div class="container">
       <div class="row">
 
-        <div class="col-md-9">
-          <div class="chart" id="the-map" data-spy="affix" data-offset-top="-1" data-offset-bottom="-1" data-width="825" data-height="800" 
-          data-margin="{&quot;top&quot;: 10, &quot;right&quot;: 10, &quot;bottom&quot;: 10, &quot;left&quot;: 10}">
-          </div>  
+        <!-- the map -->
+        <div class="cols-xs-12 col-md-push-5 col-md-7">
+          <div class="chart" id="the-map" data-spy="affix" data-offset-top="-1" data-offset-bottom="-1" data-width="652" data-height="800">
+          </div>
         </div>
 
-        <div class="col-md-3">
-          <div class="section">
-          <h1>Departures <br/> <small>A day in the life of trains.</small></h1>
+        <div class="cols-xs-12 col-md-pull-7 col-md-5">
 
-            <div class="chart" id="the-clock" data-width="200" data-height="50" data-margin="{&quot;top&quot;: 20, &quot;right&quot;: 20, &quot;bottom&quot;: 10, &quot;left&quot;: 10}"></div>
+          <!-- intro -->
+          <div class="section" id="intro">
+            <div class="col-xs-12">
 
-            <div class="chart" id="the-controls" data-width="250" data-height="20" data-margin="{&quot;top&quot;: 20, &quot;right&quot;: 20, &quot;bottom&quot;: 10, &quot;left&quot;: 10}"></div>
+              <h1>
+                A day of departures <br/> <small>Visually exploring train schedules</small>
+              </h1>
 
-            <p>
-              <a href="javascript:stopTimer()" class="timer-stop disabled"><span class="fa fa-pause-circle-o fa-lg" aria-hidden="true"></span></a>
-              <a href="javascript:startTimer()" class="timer-start"><span class="fa fa-play-circle-o fa-lg" aria-hidden="true"></span></a>
-              <a href="javascript:restartTimer()" class="timer-repeat"><span class="fa fa-repeat fa-lg" aria-hidden="true"></span></a>
-            </p>
-            
+              <div class="chart" id="the-clock" data-width="200" data-height="50"></div>
+
+              <div class="chart" id="the-controls" data-width="250" data-height="20"></div>
+
+              <p>
+                <a href="javascript:stopTimer()" class="timer-stop disabled"><span class="fa fa-pause-circle-o fa-lg" aria-hidden="true"></span></a>
+                <a href="javascript:startTimer()" class="timer-start"><span class="fa fa-play-circle-o fa-lg" aria-hidden="true"></span></a>
+                <a href="javascript:restartTimer()" class="timer-repeat"><span class="fa fa-repeat fa-lg" aria-hidden="true"></span></a>
+              </p>
+            </div>
           </div>
-          <div class="section section-departures">
-            <h4>Departures</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.</p>
-                      <div class="chart" id="the-punchcard" data-width="250" data-height="130" data-margin="{&quot;top&quot;: 10, &quot;right&quot;: 10, &quot;bottom&quot;: 10, &quot;left&quot;: 10}"></div>
-        
+
+          <!-- the departures -->
+          <div class="section" id="departures">
+            <div class="col-md-3">
+              <h4 class="pull-right">Departures</h4>
+            </div>
+            <div class="col-md-9 section-departures">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.</p>
+
+              <div class="chart" id="the-punchcard" data-width="250" data-height="130"></div>
+
+            </div>
+          </div>
+
+          <!-- the stations -->
+          <div class="section" id="stations">
+            <div class="col-md-3">
+              <h4 class="pull-right">Stations</h4>
+            </div>
+            <div class="col-md-9 section-stations">
+              <p>Busiest stations - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.</p>
+              <p>
+                <a href="#" class="click-link highlight-stops" data-stops="UT">Utrecht Centraal</a>
+                <a href="#" class="click-link highlight-stops" data-stops="ASS">Amsterdam Sloterdijk</a>
+                <a href="#" class="click-link highlight-stops" data-stops="MRN,MTR,NML,UTM">kleine stations</a>
+              </p>
+
+              <div class="chart" id="the-stations" data-width="250" data-height="300"></div>
+              
+            </div>
+          </div>
+
+          <!-- the carriers -->
+          <div class="section" id="carriers">
+            <div class="col-md-3">
+              <h4 class="pull-right">Carriers</h4>
+            </div>
+            <div class="col-md-9 section-carriers">
+
+              <!--
+              <p>
+                <a href="#" data-carriers="NS" class="hover-link-highlight highlight-carriers">NS</a> |
+                <a href="#" data-carriers="Arriva" class="hover-link-highlight highlight-carriers">Arriva</a> |
+                <a href="#" data-carriers="NS International" class="hover-link-highlight highlight-carriers">NS International</a> |
+                <a href="#" data-carriers="Breng" class="hover-link-highlight highlight-carriers">Breng</a> |
+                <a href="#" data-carriers="Valleilijn" class="hover-link-highlight highlight-carriers">Valleilijn</a> |
+                <a href="#" data-carriers="Veolia" class="hover-link-highlight highlight-carriers">Veolia</a> |
+                <a href="#" data-carriers="Syntus" class="hover-link-highlight highlight-carriers">Syntus</a> |
+                <a href="#" data-carriers="NMBS" class="hover-link-highlight highlight-carriers">NMBS</a> |
+                <a href="#" data-carriers="DB" class="hover-link-highlight highlight-carriers">DB</a> |
+                <a href="#" data-carriers="Keolis" class="hover-link-highlight highlight-carriers">Keolis</a> |
+                <a href="#" data-carriers="Breng,Keolis,DB,NMBS,Veolia,Valleilijn,Arriva" class="hover-link-highlight highlight-carriers">kleine carriers</a> |
+              </p>
+              -->
+              <p>
+                The <b>largest carrier in the Netherlands</b> is NS by far. It's <a href="#" data-carriers="NS" class="hover-link-highlight highlight-carriers">national branch</a> covers most of the cities in the country, while <a href="#" data-carriers="NS International" class="hover-link-highlight highlight-carriers">NS International</a> covers major stations alongs the routes to Germany and Belgium onwards. <br/>
+                <br/>
+                Of the <b>smaller carriers</b>, <a href="#" data-carriers="Arriva" class="hover-link-highlight highlight-carriers">Arriva</a> is the largest, covering large parts in the North an East of the country. Other carriers operate <a href="#" data-carriers="Breng,Veolia,Valleilijn" class="hover-link-highlight highlight-carriers">regional services</a> at minor stations outside the 'Randstad'. <br/>
+                </br>
+                Stations close to the border are serviced by carriers in <a href="#" data-carriers="Keolis,DB,NMBS" class="hover-link-highlight highlight-carriers">cross-border</a> lines.
+              </p>
+            </div>
+          </div>
+
+          <!-- the delays -->
+          <div class="section" id="delays">
+            <div class="col-md-3">
+              <h4 class="pull-right">Delays</h4>
+            </div>
+            <div class="col-md-9 section-delays">
+              <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.
+              </p>
+            </div>
+          </div>
 
 
+          <!-- about -->
+          <div class="section" id="about">
+            <div class="col-md-3">
+              <h4 class="pull-right">About</h4>
+            </div>
 
+            <div class="col-md-9 section-about">
+              <p>
+                <b>Design and implementation by <a href="http://www.hugojanssen.nl">Hugo Janssen</a>.</b> This project was inspired by <a href="http://mbtaviz.github.io/">Visualizing MBTA Data</a> and <a href="http://www.darkhorseanalytics.com/blog/breathing-city">Breathing city</a>. Data was obtained through the <a href="http://www.ns.nl/en/travel-information/ns-api">NS API</a> for which I coded a wrapper in R (see code <a href="https://github.com/nl-hugo">here</a>). Source code and raw data are available on <a href="https://github.com/nl-hugo">github</a>. 
+              </p>
+            </div>
           </div>
-          <div class="section section-stations">
-            <h4>Stations</h4>
-            <p>Busiest stations - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.</p>
-            <p>
-              <a href="#" class="click-link highlight-stops" data-stops="UT">Utrecht Centraal</a>
-              <a href="#" class="click-link highlight-stops" data-stops="ASS">Amsterdam Sloterdijk</a>
-              <a href="#" class="click-link highlight-stops" data-stops="MRN,MTR,NML,UTM">kleine stations</a>
-            </p>
 
-
-                      <div class="chart" id="the-stations" data-width="250" data-height="300" data-margin="{&quot;top&quot;: 20, &quot;right&quot;: 20, &quot;bottom&quot;: 10, &quot;left&quot;: 10}"></div>
-            
-          </div>
-          <div class="section section-carriers">
-            <h4>Carriers</h4>
-            <p>
-                        <p>
-              <a href="#" data-carriers="NS" class="hover-link-highlight highlight-carriers">NS</a> |
-              <a href="#" data-carriers="Arriva" class="hover-link-highlight highlight-carriers">Arriva</a> |
-              <a href="#" data-carriers="NS International" class="hover-link-highlight highlight-carriers">NS International</a> |
-              <a href="#" data-carriers="Breng" class="hover-link-highlight highlight-carriers">Breng</a> |
-              <a href="#" data-carriers="Valleilijn" class="hover-link-highlight highlight-carriers">Valleilijn</a> |
-              <a href="#" data-carriers="Veolia" class="hover-link-highlight highlight-carriers">Veolia</a> |
-              <a href="#" data-carriers="Syntus" class="hover-link-highlight highlight-carriers">Syntus</a> |
-              <a href="#" data-carriers="NMBS" class="hover-link-highlight highlight-carriers">NMBS</a> |
-              <a href="#" data-carriers="DB" class="hover-link-highlight highlight-carriers">DB</a> |
-              <a href="#" data-carriers="Keolis" class="hover-link-highlight highlight-carriers">Keolis</a> |
-              <a href="#" data-carriers="Breng,Keolis,DB,NMBS,Veolia,Valleilijn,Arriva" class="hover-link-highlight highlight-carriers">kleine carriers</a> |
-            </p>
-            <p>
-              <b>The largest carrier in the Netherlands</b> is <a href="#" data-carriers="NS" class="hover-link-highlight highlight-carriers">NS</a> by far. Other carriers operate <a href="#" data-carriers="Breng,Veolia,Valleilijn,Arriva" class="hover-link-highlight highlight-carriers">regional services</a> outside the 'Randstad'. Stations close to the border are serviced by carriers in <a href="#" data-carriers="Keolis,DB,NMBS" class="hover-link-highlight highlight-carriers">cross-border</a> lines.
-            </p>
-          </div>
-          <div class="section">
-            <h4>Delays</h4>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna sit amet felis congue blandit a non massa. Sed eleifend nulla ex, id bibendum lacus tincidunt id.
-            </p>
-          </div>
-          <div class="section">
-            <h4>About</h4>
-            <p>
-              <b>Design and implementation by <a href="http://www.hugojanssen.nl">Hugo Janssen</a>.</b> This project was inspired by <a href="http://mbtaviz.github.io/">Visualizing MBTA Data</a> and <a href="http://www.darkhorseanalytics.com/blog/breathing-city">Breathing city</a>. Data was obtained through the <a href="http://www.ns.nl/en/travel-information/ns-api">NS API</a> for which I coded a wrapper in R (see code <a href="https://github.com/nl-hugo">here</a>). Source code and raw data are available on <a href="https://github.com/nl-hugo">github</a>. 
-            </p>
-          </div>
         </div>
       </div>
-
     </div>
 
-      <div class="footer">
-        <p>Footer</p>
-      </div>
+
     
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
