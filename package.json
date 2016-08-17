@@ -1,5 +1,15 @@
 {
+  "name": "day-of-departures",
+  "version": "0.0.2",
+  "description": "Visually exploring train schedules",
+  "author": "Hugo Janssen <nl-hugo@hugojanssen.nl>",
+  "homepage": "https://nl-hugo.github.io/day-of-departures/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nl-hugo/day-of-departures"
+  },
   "private": true,
+  "license": "MIT",
   "engines": {
     "node": ">=4"
   },
@@ -46,6 +56,5 @@
         "single"
       ]
     }
-  },
-  "version": "0.0.2"
+  }
 }
