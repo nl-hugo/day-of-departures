@@ -24,13 +24,12 @@ text {
 }
 
 h1 {
+  font-family: $headings-font-family;
   text-transform: uppercase;
   font-size: $font-size-header;
-}
-
-
-p {
-  margin-bottom: 12px;
+  font-weight: $headings-font-weight;
+  line-height: $headings-line-height;
+  color: $headings-color;
 }
 
 

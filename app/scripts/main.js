@@ -87,6 +87,8 @@ function addSvg(id, w, h /*, m*/) {
 }
 
 
+
+
 function drawStations(map, stations) {
 
   var margin = {top: 0, right: 0, bottom: 10, left: 0},
@@ -493,6 +495,7 @@ console.log(t);
 
   clock.enter().append('text')
       .attr('x', 100)
+      .attr('y', 20)
       .attr('dy', '.35em')//.transition().ease(d3.easeCubicIn).duration(2000).delay(0)
 //          .transition()
 //      .duration(500 / speed)
