@@ -31,7 +31,8 @@
     "wiredep": "^2.2.2"
   },
   "scripts": {
-    "deploy": "git add --all && git commit -m \"Release at $(date)\" && git subtree split --prefix dist -b gh-pages && git push -f origin gh-pages:gh-pages && git branch -D gh-pages && git push origin master"
+    "version" : "npm version patch -m 'Upgrade to %s'",
+    "deploy": "git add -A && git commit -m \"Release at $(date)\" && git subtree split --prefix dist -b gh-pages && git push -f origin gh-pages:gh-pages && git branch -D gh-pages && git push origin master --tags"
   },
   "eslintConfig": {
     "env": {
