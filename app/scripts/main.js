@@ -494,8 +494,8 @@ function updateClock(t) {
 console.log(t);
 
   clock.enter().append('text')
-      .attr('x', 100)
-      .attr('y', 20)
+      .attr('x', 6)
+      .attr('y', 16)
       .attr('dy', '.35em')//.transition().ease(d3.easeCubicIn).duration(2000).delay(0)
 //          .transition()
 //      .duration(500 / speed)
