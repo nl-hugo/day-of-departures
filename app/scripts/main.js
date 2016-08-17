@@ -71,9 +71,9 @@ var activeStations = {
 };
 
 queue()
-    .defer(d3.csv, '../data/stations.csv')
-    .defer(d3.csv, '../data/timetable.csv')
-    .defer(d3.json, '../data/gemeente.json')
+    .defer(d3.csv, './data/stations.csv')
+    .defer(d3.csv, './data/timetable.csv')
+    .defer(d3.json, './data/gemeente.json')
     .await(ready);
 
 function addSvg(id, w, h /*, m*/) {
