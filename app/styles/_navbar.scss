@@ -1,0 +1,19 @@
+/**
+ * _navbar.scss
+ */
+
+nav {
+
+  h1 {
+    font-family: $headings-font-family;
+    text-transform: uppercase;
+    font-size: $font-size-header;
+    font-weight: $headings-font-weight;
+    line-height: $headings-line-height;
+    color:$headings-color;
+  }
+}
+
+.navbar-default {
+  background-color: white;
+}
